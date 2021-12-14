@@ -14,6 +14,8 @@ Open Terminal and put in the following commands:
 
 ### Updating
 
+When you have new code that you want to share, you need to do the following.
+
 On the developer side:
 
 	git add <modified file>
@@ -21,6 +23,8 @@ On the developer side:
 e.g.
 
 	git add oCal.py
+
+	git status
 
 	git commit -m "describe changes here"
 
