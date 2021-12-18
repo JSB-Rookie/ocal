@@ -32,10 +32,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.currentPriceLE.setValidator(QDoubleValidator(0.99,9999.99,2))
         self.strikePriceLE.setValidator(QDoubleValidator(0.99,9999.99,2))
         self.volatilityLE_1.setValidator(QDoubleValidator(00.01,99.99,2))
-        self.riskFreeRateLE.setValidator(QDoubleValidator(0.001, 0.999,3))
+        self.riskFreeRateLE.setValidator(QDoubleValidator(00.10, 99.99,2))
         self.volatilityLabel_2.hide()
         self.volatilityLE_2.hide()
-        self.expiratoryDateDateEdit.resize(176, 27)
         self.rbCP.clicked.connect(self.rbCPclick)
         self.rbCV.clicked.connect(self.rbCVclick)
         self.rbPP.clicked.connect(self.rbPPclick)
@@ -78,6 +77,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         S = float(self.currentPriceLE.text())
         K = float(self.strikePriceLE.text())
         r = float(self.riskFreeRateLE.text())
+        r = r / 100
         v = self.volatilityLE_1.text()
         v = float(v)
         v = v / 100
@@ -99,6 +99,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         S = float(self.currentPriceLE.text())
         K = float(self.strikePriceLE.text())
         r = float(self.riskFreeRateLE.text())
+        r = r / 100
         v = float(self.volatilityLE_1.text())
         v = v / 100
         t = float(self.timeToMaturityLE.text())
@@ -182,6 +183,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             S = float(self.currentPriceLE.text())
             K = float(self.strikePriceLE.text())
             r = float(self.riskFreeRateLE.text())
+            r = r / 100
             v = v + .001
             t = float(self.timeToMaturityLE.text())
             d1_numerator = np.log(S/K) + (r + ((v * v)/2)) * t
@@ -197,7 +199,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             print("v = ", str(v))
             print("premUK = ", str(premUK))
 
-            vF = int(v * 100)
+            vF = float(v * 100)
+            vF = round(vF, 2)
+            #vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
@@ -228,7 +232,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             print("v = ", str(v))
             print("premUK = ", str(premUK))
 
-            vF = int(v * 100)
+            vF = float(v * 100)
+            vF = round(vF, 2)
+            #vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
@@ -236,7 +242,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def clear(self):
         self.currentDateLE.setText("")
         self.currentPriceLE.setText("")
-        self.expiratoryDateDateEdit.clear()        
+        lineEdit = self.expiratoryDateDateEdit.findChild(QLineEdit) 
+        lineEdit.setText("")   
         self.premiumInputLE.setText("")
         self.premiumLE.setText("")
         self.premiumLE.hide()
