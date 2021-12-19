@@ -198,6 +198,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             print("premUK = ", str(premUK))
 
             vF = int(v * 100)
+            vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
@@ -229,6 +230,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             print("premUK = ", str(premUK))
 
             vF = int(v * 100)
+            vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
