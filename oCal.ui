@@ -10,6 +10,11 @@
     <height>1080</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>20</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Options Calculator</string>
   </property>
@@ -212,27 +217,28 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>840</y>
-      <width>100</width>
+      <y>760</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>20</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>Clear</string>
+     <string>C l e a r</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>114</y>
+      <x>480</x>
+      <y>110</y>
       <width>471</width>
-      <height>454</height>
+      <height>481</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -293,9 +299,9 @@
      <item row="2" column="1">
       <widget class="QDateEdit" name="expiratoryDateDateEdit">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+         <horstretch>3</horstretch>
+         <verstretch>3</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
@@ -313,7 +319,13 @@
        <property name="sizeIncrement">
         <size>
          <width>0</width>
-         <height>0</height>
+         <height>3</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>27</height>
         </size>
        </property>
        <property name="font">
@@ -321,8 +333,14 @@
          <pointsize>20</pointsize>
         </font>
        </property>
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
+       </property>
        <property name="inputMethodHints">
         <set>Qt::ImhDate</set>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -466,7 +484,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Volatility Input:</string>
+        <string>% Volatility Input:</string>
        </property>
       </widget>
      </item>
@@ -484,7 +502,7 @@
         <number>0</number>
        </property>
        <property name="placeholderText">
-        <string>00.0%</string>
+        <string>00.0</string>
        </property>
       </widget>
      </item>
@@ -496,7 +514,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Risk-Free Rate:</string>
+        <string>% Risk-Free Rate:</string>
        </property>
       </widget>
      </item>
@@ -506,6 +524,9 @@
         <font>
          <pointsize>20</pointsize>
         </font>
+       </property>
+       <property name="placeholderText">
+        <string>0.00</string>
        </property>
       </widget>
      </item>

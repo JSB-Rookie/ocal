@@ -2,7 +2,7 @@ import sys
 import numpy as np
 import scipy.stats as stats
 import math
-import statistics
+#import statistics
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import (QPushButton, QLabel, QLineEdit, QDateEdit, QRadioButton, QWidget,
     QCalendarWidget, QApplication, QMainWindow, QFormLayout)
@@ -32,10 +32,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.currentPriceLE.setValidator(QDoubleValidator(0.99,9999.99,2))
         self.strikePriceLE.setValidator(QDoubleValidator(0.99,9999.99,2))
         self.volatilityLE_1.setValidator(QDoubleValidator(00.01,99.99,2))
-        self.riskFreeRateLE.setValidator(QDoubleValidator(0.001, 0.999,3))
+        self.riskFreeRateLE.setValidator(QDoubleValidator(00.10, 99.99,2))
         self.volatilityLabel_2.hide()
         self.volatilityLE_2.hide()
-        self.expiratoryDateDateEdit.resize(176, 27)
         self.rbCP.clicked.connect(self.rbCPclick)
         self.rbCV.clicked.connect(self.rbCVclick)
         self.rbPP.clicked.connect(self.rbPPclick)
@@ -63,13 +62,13 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def calcMaturityTime(self):
         d1 = datetime.now().date()
-        print("d1: ", d1)
+        #print("d1: ", d1)
         date_input = self.expiratoryDateDateEdit.text()
-        print("date_input", date_input)
+        #print("date_input", date_input)
         #self.expiratoryDateDateEdit.calendarPopup.setDateEditAcceptDelay(3000)
         datetimeobject = datetime.strptime(date_input, '%d %b %Y')
         d2 = datetimeobject.date()
-        print("d2 is: ", d2)
+        #print("d2 is: ", d2)
         delta = d2 - d1
         matTime = delta.days / 365.25
         self.timeToMaturityLE.setText(str("{:.4f}".format(matTime)))
@@ -78,6 +77,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         S = float(self.currentPriceLE.text())
         K = float(self.strikePriceLE.text())
         r = float(self.riskFreeRateLE.text())
+        r = r / 100
         v = self.volatilityLE_1.text()
         v = float(v)
         v = v / 100
@@ -99,6 +99,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         S = float(self.currentPriceLE.text())
         K = float(self.strikePriceLE.text())
         r = float(self.riskFreeRateLE.text())
+        r = r / 100
         v = float(self.volatilityLE_1.text())
         v = v / 100
         t = float(self.timeToMaturityLE.text())
@@ -182,6 +183,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             S = float(self.currentPriceLE.text())
             K = float(self.strikePriceLE.text())
             r = float(self.riskFreeRateLE.text())
+            r = r / 100
             v = v + .001
             t = float(self.timeToMaturityLE.text())
             d1_numerator = np.log(S/K) + (r + ((v * v)/2)) * t
@@ -194,11 +196,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             premium = firstFactor - secondFactor
             premUK = premium
 
-            print("v = ", str(v))
-            print("premUK = ", str(premUK))
-
+            #print("v = ", str(v))
+            #print("premUK = ", str(premUK))
+            
             vF = int(v * 100)
             vF = format(vF, ".2f")
+            vF = float(v * 100)
+            vF = round(vF, 2)
+            #vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
@@ -213,6 +218,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             S = float(self.currentPriceLE.text())
             K = float(self.strikePriceLE.text())
             r = float(self.riskFreeRateLE.text())
+            r = r / 100
             v = v + .001
             t = float(self.timeToMaturityLE.text())
             d1_numerator = np.log(S/K) + (r + ((v * v)/2)) * t
@@ -226,11 +232,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             premiumP = factorOne - factorTwo
             premUK = premiumP
 
-            print("v = ", str(v))
-            print("premUK = ", str(premUK))
+            #print("v = ", str(v))
+            #print("premUK = ", str(premUK))
 
             vF = int(v * 100)
             vF = format(vF, ".2f")
+            vF = float(v * 100)
+            vF = round(vF, 2)
+            #vF = format(vF, ".2f")
             self.volatilityLabel_2.show()
             self.volatilityLE_2.show()
             self.volatilityLE_2.setText(str(vF) + "%")
@@ -238,7 +247,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def clear(self):
         self.currentDateLE.setText("")
         self.currentPriceLE.setText("")
-        self.expiratoryDateDateEdit.clear()        
+        lineEdit = self.expiratoryDateDateEdit.findChild(QLineEdit) 
+        lineEdit.setText("")   
         self.premiumInputLE.setText("")
         self.premiumLE.setText("")
         self.premiumLE.hide()
