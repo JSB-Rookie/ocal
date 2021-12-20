@@ -421,7 +421,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Premium Input</string>
+        <string>$ Premium Input</string>
        </property>
       </widget>
      </item>
@@ -442,7 +442,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Current Price:</string>
+        <string>$ Current Price:</string>
        </property>
       </widget>
      </item>
@@ -463,7 +463,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Strike Price:</string>
+        <string>$ Strike Price:</string>
        </property>
       </widget>
      </item>
