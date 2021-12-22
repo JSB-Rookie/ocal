@@ -334,13 +334,13 @@
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::TabFocus</enum>
+        <enum>Qt::StrongFocus</enum>
        </property>
        <property name="inputMethodHints">
         <set>Qt::ImhDate</set>
        </property>
        <property name="frame">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
