@@ -176,7 +176,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def calCV(self):
         premK = float(self.premiumInputLE.text())
         premUK = 0.05
-        v = 0.19
+        v = 0.10
         self.volatilityLE_2.show()
         self.volatilityLabel_2.show()
         while premUK < premK:
@@ -211,7 +211,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def calPV(self):
         premK = float(self.premiumInputLE.text())
         premUK = 0.05
-        v = 0.19
+        v = 0.10
         self.volatilityLE_2.show()
         self.volatilityLabel_2.show()
         while premUK < premK:
